@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { FeedbackWithRelations } from '@/types/feedback'
 import { HeatmapVisualization } from '@/components/heatmap/HeatmapVisualization'
@@ -12,7 +12,7 @@ import { ArrowLeft, RefreshCw } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
-export default function HeatmapPage() {
+function HeatmapContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const feedbackId = searchParams.get('id')
@@ -140,5 +140,13 @@ export default function HeatmapPage() {
       </div>
     </main>
     </>
+  )
+}
+
+export default function HeatmapPage() {
+  return (
+    <Suspense fallback={<LoadingSkeleton />}>
+      <HeatmapContent />
+    </Suspense>
   )
 }

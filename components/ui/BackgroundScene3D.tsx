@@ -62,6 +62,7 @@ function ParticleField({ count = 100 }: { count?: number }) {
           count={particles.length / 3}
           array={particles}
           itemSize={3}
+          args={[particles, 3]}
         />
       </bufferGeometry>
       <pointsMaterial
